@@ -1,0 +1,35 @@
+CREATE TABLE City (
+  id LONG PRIMARY KEY, name VARCHAR)
+  WITH "template=replicated";
+
+CREATE TABLE Person (
+  id LONG, name VARCHAR, city_id LONG, PRIMARY KEY (id, city_id))
+  WITH "backups=1, affinityKey=city_id";
+
+CREATE INDEX idx_city_name ON City (name);
+
+CREATE INDEX idx_person_name ON Person (name);
+
+INSERT INTO City (id, name) VALUES (1, 'Forest Hill');
+INSERT INTO City (id, name) VALUES (2, 'Denver');
+INSERT INTO City (id, name) VALUES (3, 'St. Petersburg');
+
+INSERT INTO Person (id, name, city_id) VALUES (1, 'John Doe', 3);
+INSERT INTO Person (id, name, city_id) VALUES (2, 'Jane Roe', 2);
+INSERT INTO Person (id, name, city_id) VALUES (3, 'Mary Major', 1);
+INSERT INTO Person (id, name, city_id) VALUES (4, 'Richard Miles', 2);
+
+SELECT * FROM City;
+
+SELECT name FROM City WHERE id = 1;
+
+SELECT p.name, c.name
+FROM Person p, City c
+WHERE p.city_id = c.id;
+
+UPDATE City
+SET name = 'Foster City'
+WHERE id = 2;
+
+DELETE FROM Person
+WHERE name = 'John Doe';

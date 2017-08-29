@@ -26,7 +26,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Ignite-SQL-Getting-Started" target="1.5" />
+      <module name="Ignite-SQL-Getting-Started" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
